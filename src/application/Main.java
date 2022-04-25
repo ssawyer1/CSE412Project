@@ -1,4 +1,4 @@
-package application;
+
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -27,13 +27,15 @@ import javafx.stage.Stage;
 import javafx.scene.chart.*;
 
 public class Main extends Application {
-
+	JavaDB db = new JavaDB();
 	public static void main(String[] args) {
+
 		launch(args);
 	}
 
 	@Override
 	public void start(Stage primaryStage) {
+
 		BorderPane bp = new BorderPane();
 		bp.setStyle("-fx-background-color: rgb(" + 168 + "," + 198 + ", " + 250 + ");");
 
@@ -121,19 +123,18 @@ public class Main extends Application {
 
 					series1.setName("2022");
 
-					JavaDB db = new JavaDB();
+
 					ResultSet rs = db.selectWeeklyPercentDeathChange();
 
 					try {
 						while (rs.next()) {
 							String name = rs.getString("name");
-							int weekDeathChange = rs.getInt("week_percent_deaths");
-							series1.getData().add(new XYChart.Data(name, weekDeathChange));
+							int week_percent_deaths = rs.getInt("week_percent_deaths");
+							series1.getData().add(new XYChart.Data(name, week_percent_deaths));
 						}
 					} catch (Exception e) {
 					}
 
-					db.closeConnection();
 
 					// Two lines used for testing
 					// series1.getData().add(new XYChart.Data("Portugal", 50));
@@ -157,14 +158,13 @@ public class Main extends Application {
 					series1.setName("2022");
 					bc.getData().clear();
 
-					JavaDB db = new JavaDB();
 					ResultSet rs = db.selectDeathsLastSevenDays();
 
 					try {
 						while (rs.next()) {
 							String name = rs.getString("name");
-							int weeklyDeaths = rs.getInt("deaths_last_seven");
-							series1.getData().add(new XYChart.Data(name, weeklyDeaths));
+							int deaths_last_seven = rs.getInt("deaths_last_seven");
+							series1.getData().add(new XYChart.Data(name, deaths_last_seven));
 						}
 					} catch (Exception e) {
 					}
@@ -318,5 +318,9 @@ public class Main extends Application {
 		 */
 		primaryStage.setScene(new Scene(bp, 1050, 650));
 		primaryStage.show();
+		primaryStage.setOnCloseRequest(
+		e -> {
+			db.closeConnection();
+		});
 	}
 }
