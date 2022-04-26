@@ -30,11 +30,13 @@ public class Main extends Application {
 	JavaDB db = new JavaDB();
 
 	public static void main(String[] args) {
+
 		launch(args);
 	}
 
 	@Override
 	public void start(Stage primaryStage) {
+
 		BorderPane bp = new BorderPane();
 		bp.setStyle("-fx-background-color: rgb(" + 168 + "," + 198 + ", " + 250 + ");");
 
