@@ -110,41 +110,40 @@ public class Main extends Application {
 						bp.getChildren().remove(bc);
 					}
 					bc.setTitle("             Weekly Percent Change in Deaths");
-					//xAxis.setLabel("Days");
-					//yAxis.setLabel("Deaths");
+					// xAxis.setLabel("Days");
+					// yAxis.setLabel("Deaths");
 					XYChart.Series series1 = new XYChart.Series();
 					CategoryAxis xScatterAxis = new CategoryAxis();
 					NumberAxis yScatterAxis = new NumberAxis(-100, 250, 50);
-					xScatterAxis.setLabel("Country");
-					yScatterAxis.setLabel("Weekly % change in deaths");
-					ScatterChart<String, Number> scatterChart = new ScatterChart<String, Number>(xScatterAxis, yScatterAxis);
-					
+					xScatterAxis.setLabel("Weekly % change in deaths");
+					yScatterAxis.setLabel("Country");
+					ScatterChart<String, Number> scatterChart = new ScatterChart<String, Number>(xScatterAxis,
+							yScatterAxis);
+
 					series1.setName("2022");
-					
-					//JavaDB db = new JavaDB();
+
+					// JavaDB db = new JavaDB();
 					ResultSet rs = db.selectWeeklyPercentDeathChange();
-					
-					try 
-					{
-						while(rs.next())
-						{
+
+					try {
+						while (rs.next()) {
 							String name = rs.getString("name");
 							int week_percent_deaths = rs.getInt("week_percent_deaths");
 							series1.getData().add(new XYChart.Data(name, week_percent_deaths));
 						}
-					}catch(Exception e) {}
-					
-					//db.closeConnection();
-					
+					} catch (Exception e) {
+					}
+
+					// db.closeConnection();
+
 					// Two lines used for testing
-//					series1.getData().add(new XYChart.Data("Portugal", 50));
-//					series1.getData().add(new XYChart.Data("Chile", -50));
-					
+					// series1.getData().add(new XYChart.Data("Portugal", 50));
+					// series1.getData().add(new XYChart.Data("Chile", -50));
+
 					scatterChart.getData().addAll(series1);
-					
 
 					// add the graph to the borderpane
-					//bp.setCenter(bc);
+					// bp.setCenter(bc);
 					bp.setCenter(scatterChart);
 				});
 
@@ -159,26 +158,24 @@ public class Main extends Application {
 					series1.setName("2022");
 					bc.getData().clear();
 					yAxis.setAutoRanging(true);
-					
-					
-					//JavaDB db = new JavaDB();
+
+					// JavaDB db = new JavaDB();
 					ResultSet rs = db.selectDeathsLastSevenDays();
-					
-					try 
-					{
-						while(rs.next())
-						{
+
+					try {
+						while (rs.next()) {
 							String name = rs.getString("name");
 							int deaths_last_seven = rs.getInt("deaths_last_seven");
 							series1.getData().add(new XYChart.Data(name, deaths_last_seven));
 						}
-					}catch(Exception e) {}
-					
-					//db.closeConnection();
-//					series1.getData().add(new XYChart.Data("Portugal", 50));
-//					series1.getData().add(new XYChart.Data("Chile", 100));
-//					series1.getData().add(new XYChart.Data("Peru", 500));
-					
+					} catch (Exception e) {
+					}
+
+					// db.closeConnection();
+					// series1.getData().add(new XYChart.Data("Portugal", 50));
+					// series1.getData().add(new XYChart.Data("Chile", 100));
+					// series1.getData().add(new XYChart.Data("Peru", 500));
+
 					bc.getData().addAll(series1);
 					// add the graph to the borderpane
 					bp.setCenter(bc);
@@ -189,35 +186,41 @@ public class Main extends Application {
 						bp.getChildren().remove(bc);
 					}
 					bc.setTitle("             Deaths in the Preceding Week");
-					xAxis.setLabel("Country");
+					xAxis.setLabel("Days");
 					yAxis.setLabel("Deaths");
 					XYChart.Series series1 = new XYChart.Series();
 					series1.setName("2022");
-					
+
 					bc.getData().clear();
 					yAxis.setAutoRanging(true);
 					xAxis.setAutoRanging(true);
-					
-					//JavaDB db = new javaDB();
+
+					// JavaDB db = new javaDB();
 					ResultSet rs = db.selectDeathsPrecSevenDays();
-					
-					try
-					{
-						while(rs.next())
-						{
+
+					try {
+						while (rs.next()) {
 							String name = rs.getString("name");
 							int deaths_prec_seven = rs.getInt("deaths_prec_seven");
 							series1.getData().add(new XYChart.Data(name, deaths_prec_seven));
-							
-						}
-					}catch(Exception e) {}
-					
-					//db.closeConnection();
-//					series1.getData().add(new XYChart.Data("Portugal", 0));
-//					series1.getData().add(new XYChart.Data("Chile", 90));
-//					series1.getData().add(new XYChart.Data("Peru", 500));
 
-					bc.getData().addAll(series1);
+						}
+					} catch (Exception e) {
+					}
+
+					// db.closeConnection();
+					// series1.getData().add(new XYChart.Data("Portugal", 0));
+					// series1.getData().add(new XYChart.Data("Chile", 90));
+					// series1.getData().add(new XYChart.Data("Peru", 500));
+
+					/*
+					 * JavaDB db = new JavaDB(); ResultSet rs = db.selectDeathsPrecSevenDays();
+					 * 
+					 * try{ while(rs.next()){ String name = rs.getString("name"); int population =
+					 * rs.getInt("population"); if(population > 30000000){ series1.getData().add(new
+					 * XYChart.Data(name, population)); } } }catch(Exception e){}
+					 * db.closeConnection(); bc.getData().addAll(series1);
+					 */
 
 					// add the graph to the borderpane
 					bp.setCenter(bc);
@@ -251,31 +254,30 @@ public class Main extends Application {
 					NumberAxis yScatterAxis = new NumberAxis(-200, 1150, 50);
 					xScatterAxis.setLabel("Country");
 					yScatterAxis.setLabel("Weekly % change in cases");
-					ScatterChart<String, Number> scatterChart = new ScatterChart<String, Number>(xScatterAxis, yScatterAxis);
-					
-					//JavaDB db = new JavaDB();
+					ScatterChart<String, Number> scatterChart = new ScatterChart<String, Number>(xScatterAxis,
+							yScatterAxis);
+
+					// JavaDB db = new JavaDB();
 					ResultSet rs = db.selectWeeklyPercentCaseChange();
-					
-					try 
-					{
-						while(rs.next())
-						{
+
+					try {
+						while (rs.next()) {
 							String name = rs.getString("name");
 							int week_perceent_cases = rs.getInt("week_percent_cases");
 							series1.getData().add(new XYChart.Data(name, week_perceent_cases));
 						}
-					}catch(Exception e) {}
-					
-					//db.closeConnection();
-//					series1.getData().add(new XYChart.Data("Portugal", -100));
-//					series1.getData().add(new XYChart.Data("Chile", 90));
-//					series1.getData().add(new XYChart.Data("Peru", 1050));
-					
+					} catch (Exception e) {
+					}
+
+					// db.closeConnection();
+					// series1.getData().add(new XYChart.Data("Portugal", -100));
+					// series1.getData().add(new XYChart.Data("Chile", 90));
+					// series1.getData().add(new XYChart.Data("Peru", 1050));
+
 					scatterChart.getData().addAll(series1);
 
 					// add the graph to the borderpane
-					//bp.setCenter(bc);
-					bp.setCenter(scatterChart);
+					bp.setCenter(bc);
 				});
 
 				cases_last.setOnAction(value -> {
@@ -291,28 +293,25 @@ public class Main extends Application {
 
 					bc.getData().clear();
 					yAxis.setAutoRanging(true);
-					
-					
-					//JavaDB db = new JavaDB();
+
+					// JavaDB db = new JavaDB();
 					ResultSet rs = db.selectDeathsLastSevenDays();
-					
-					try 
-					{
-						while(rs.next())
-						{
+
+					try {
+						while (rs.next()) {
 							String name = rs.getString("name");
 							int cases_last_seven = rs.getInt("cases_last_seven");
 							series1.getData().add(new XYChart.Data(name, cases_last_seven));
 						}
-					}catch(Exception e) {}
-					
-					//db.closeConnection();
-//					series1.getData().add(new XYChart.Data("Portugal", 50));
-//					series1.getData().add(new XYChart.Data("Chile", 4350));
-//					series1.getData().add(new XYChart.Data("Peru", 100000));
-					
+					} catch (Exception e) {
+					}
+
+					// db.closeConnection();
+					// series1.getData().add(new XYChart.Data("Portugal", 50));
+					// series1.getData().add(new XYChart.Data("Chile", 4350));
+					// series1.getData().add(new XYChart.Data("Peru", 100000));
+
 					bc.getData().addAll(series1);
-					
 
 					// add the graph to the borderpane
 					bp.setCenter(bc);
@@ -325,35 +324,33 @@ public class Main extends Application {
 					}
 
 					bc.setTitle("             Cases in the preceding Week");
-					xAxis.setLabel("Country");
+					xAxis.setLabel("Days");
 					yAxis.setLabel("Cases");
 					XYChart.Series series1 = new XYChart.Series();
 					series1.setName("2022");
 
 					bc.getData().clear();
 					yAxis.setAutoRanging(true);
-					
-					
-					//JavaDB db = new JavaDB();
+
+					// JavaDB db = new JavaDB();
 					ResultSet rs = db.selectDeathsLastSevenDays();
-					
-					try 
-					{
-						while(rs.next())
-						{
+
+					try {
+						while (rs.next()) {
 							String name = rs.getString("name");
 							int cases_prec_seven = rs.getInt("cases_prec_seven");
 							series1.getData().add(new XYChart.Data(name, cases_prec_seven));
 						}
-					}catch(Exception e) {}
-					
-					//db.closeConnection();
-//					series1.getData().add(new XYChart.Data("Portugal", 38475));
-//					series1.getData().add(new XYChart.Data("Chile", 4000));
-//					series1.getData().add(new XYChart.Data("Peru", 143800));
-					
+					} catch (Exception e) {
+					}
+
+					// db.closeConnection();
+					// series1.getData().add(new XYChart.Data("Portugal", 38475));
+					// series1.getData().add(new XYChart.Data("Chile", 4000));
+					// series1.getData().add(new XYChart.Data("Peru", 143800));
+
 					bc.getData().addAll(series1);
-					
+
 					// add the graph to the borderpane
 					bp.setCenter(bc);
 
@@ -390,9 +387,8 @@ public class Main extends Application {
 		 */
 		primaryStage.setScene(new Scene(bp, 1050, 650));
 		primaryStage.show();
-		primaryStage.setOnCloseRequest(
-				e -> {
-					db.closeConnection();
-				});
+		primaryStage.setOnCloseRequest(e -> {
+			db.closeConnection();
+		});
 	}
 }
